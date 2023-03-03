@@ -29,7 +29,8 @@ print(symbol)
 #changePlayer(player, symbol)
 """
 
-horizontalBoard = ['','X','X','X','','','']
+horizontalBoard = [['','X','X','X','','',''],['','X','X','X','X','','']]
+
 verticalBoard = [['X','X',''],['X','',''],['X','',''],['X','','']]
 symbol = 'X'
 player = 'Player 1'
@@ -40,16 +41,17 @@ def announceWinner(player):
 
 def checkHorizontalWin(horizontalBoard, symbol, player):
   count = 0
-  for i in range(len(horizontalBoard)):
-    if horizontalBoard[i] == symbol:
-      count += 1
-      if count == 4:
-        announceWinner(player)
-    else:
-      count = 0 # resets count to 0
-    #print(horizontalBoard[i])
+  for row in horizontalBoard:
+    for i in range(len(row)):
+      if row[i] == symbol:
+        count += 1
+        if count == 4:
+          announceWinner(player)
+      else:
+        count = 0 # resets count to 0
+      #print(horizontalBoard[i])
 
-
+"""
 counts = [0] * len(verticalBoard[0])
 def checkVerticalWin(verticalBoard, symbol, player):
   for sublist in verticalBoard:
@@ -61,7 +63,7 @@ def checkVerticalWin(verticalBoard, symbol, player):
   for row in counts:
     if row >= 4:
       announceWinner(player)
-  
+"""  
   
 
 
@@ -70,5 +72,5 @@ def checkVerticalWin(verticalBoard, symbol, player):
 
 
 checkHorizontalWin(horizontalBoard, symbol, player)
-checkVerticalWin(verticalBoard, symbol, player)
+#checkVerticalWin(verticalBoard, symbol, player)
 
