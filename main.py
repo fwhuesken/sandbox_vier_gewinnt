@@ -11,7 +11,7 @@ symbol = symbol1
 def changePlayer(player, symbol):
   if player == player1: 
     player = player2
-    symbol = symbol2 # specify symbol on board for player1
+    symbol = symbol2 # specify symbol on horizontalBoard for player1
     #print(player, symbol)
   else:
     player = player1 # switch players for next round
@@ -29,36 +29,46 @@ print(symbol)
 #changePlayer(player, symbol)
 """
 
-board = ['X','X','X','X','','','']
-board2 = [['X','',''],['X','',''],['X','',''],['X','','']]
+horizontalBoard = ['','X','X','X','','','']
+verticalBoard = [['X','X',''],['X','',''],['X','',''],['X','','']]
 symbol = 'X'
 player = 'Player 1'
 
-def announceWinner(count, player):
-  if count == 4:
-    print(f"{player} wins the game, whoop whoop!")
-    sys.exit()
+def announceWinner(player):
+  print(f"{player} wins the game, whoop whoop!")
+  sys.exit()
 
-def checkHorizontalWin(board, symbol):
+def checkHorizontalWin(horizontalBoard, symbol, player):
   count = 0
-  for i in range(len(board)):
-    if board[i] == symbol:
+  for i in range(len(horizontalBoard)):
+    if horizontalBoard[i] == symbol:
       count += 1
-      announceWinner(count, player)
+      if count == 4:
+        announceWinner(player)
     else:
-      count -= 1
-      print(count)
-    print(board[i])
+      count = 0 # resets count to 0
+    #print(horizontalBoard[i])
+
+
+counts = [0] * len(verticalBoard[0])
+def checkVerticalWin(verticalBoard, symbol, player):
+  for sublist in verticalBoard:
+      for i in range(len(sublist)):
+          if sublist[i] == symbol:
+              counts[i] += 1
+  print(counts)
+  
+  for row in counts:
+    if row >= 4:
+      announceWinner(player)
+  
+  
 
 
 
 
 
 
-
-
-
-
-checkHorizontalWin(board, symbol)
-
+checkHorizontalWin(horizontalBoard, symbol, player)
+checkVerticalWin(verticalBoard, symbol, player)
 
